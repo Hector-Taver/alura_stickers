@@ -11,10 +11,6 @@ public class App {
         Client http = new Client();
         String json = http.findData(url);
 
-        // Extrair só os dados que interessam (título, poster, classificação)
-        JsonParser parser = new JsonParser();
-        List<Map<String, String>> contentList = parser.parse(json);
-
         // Exibir e manipular os dados
         StickerGenerator generator = new StickerGenerator();
         for (int i = 0; i < 10; i++) {
