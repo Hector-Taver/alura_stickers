@@ -1,6 +1,13 @@
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 public class StickerGenerator {
-  public void create() {
+  public void create() throws IOException {
     // Leitura da imagem
+    BufferedImage originalImage = ImageIO.read(new File("assets/movie.jpg"));
 
     // Criar nova imagem em memória com transparência e com tamanho novo
 
