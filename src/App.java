@@ -1,32 +1,36 @@
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        // Fazer uma conexão HTTP com a API e buscar os top 250 filmes
+        // IMDB
         String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
+        ContentExtractor extractor = new IMDBContentExtractor();
+
+        // Nasa
+        // String url =
+        // "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=2022-06-12&end_date=2022-06-14";
+        // ContentExtractor extractor = new NasaContentExtractor();
 
         Client http = new Client();
         String json = http.findData(url);
 
         // Exibir e manipular os dados
+        List<Content> contents = extractor.contentExtractor(json);
+
         StickerGenerator generator = new StickerGenerator();
-        for (int i = 0; i < 10; i++) {
-            Map<String, String> content = contentList.get(i);
 
-            String urlImage = content.get("image").replaceAll("(@+)(.*).jpg$", "$1.jpg");
-            String title = content.get("title");
-            InputStream inputStream = new URL(urlImage).openStream();
+        for (int i = 0; i < 3; i++) {
+            Content content = contents.get(i);
 
-            String fileName = "assets/output/" + title + ".png";
+            InputStream inputStream = new URL(content.getUrlImage()).openStream();
+
+            String fileName = "assets/output/" + content.getTitle() + ".png";
 
             generator.create(inputStream, fileName);
 
-            System.out.println(title);
-            System.out.println(urlImage);
-            System.out.println(content.get("imDbRating"));
+            System.out.println(content.getTitle());
             System.out.println();
         }
     }

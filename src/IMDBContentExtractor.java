@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class IMDBContentExtractor {
+public class IMDBContentExtractor implements ContentExtractor {
   public List<Content> contentExtractor(String json) {
     // Extrair só os dados que interessam (título, poster, classificação)
     JsonParser parser = new JsonParser();
