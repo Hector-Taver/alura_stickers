@@ -4,13 +4,14 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
 public class StickerGenerator {
-  public void create() throws IOException {
+  public void create(InputStream inputStream, String fileName) throws IOException {
     // Leitura da imagem
-    BufferedImage originalImage = ImageIO.read(new File("assets/input/movie.jpg"));
+    BufferedImage originalImage = ImageIO.read(inputStream);
 
     // Criar nova imagem em memória com transparência e com tamanho novo
     int width = originalImage.getWidth();
@@ -31,11 +32,6 @@ public class StickerGenerator {
     graphics.drawString("TOPZERA", 200, (int) (newHeight - (newHeight * 0.083)));
 
     // Escrever a nova imagem em um novo arquivo
-    ImageIO.write(newImage, "png", new File("assets/output/sticker.png"));
-  }
-
-  public static void main(String[] args) throws IOException {
-    StickerGenerator generator = new StickerGenerator();
-    generator.create();
+    ImageIO.write(newImage, "png", new File(fileName));
   }
 }
