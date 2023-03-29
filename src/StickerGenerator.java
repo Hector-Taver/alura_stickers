@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,8 +22,13 @@ public class StickerGenerator {
     Graphics2D graphics = (Graphics2D) newImage.getGraphics();
     graphics.drawImage(originalImage, 0, 0, null);
 
+    // Configurar a fonte
+    Font font = new Font(Font.SANS_SERIF, Font.BOLD, 64);
+    graphics.setColor(Color.YELLOW);
+    graphics.setFont(font);
+
     // Escrever uma frase na nova imagem
-    graphics.drawString("TOPZERA", 0, (int) (newHeight - (newHeight * 0.083)));
+    graphics.drawString("TOPZERA", 200, (int) (newHeight - (newHeight * 0.083)));
 
     // Escrever a nova imagem em um novo arquivo
     ImageIO.write(newImage, "png", new File("assets/output/sticker.png"));
