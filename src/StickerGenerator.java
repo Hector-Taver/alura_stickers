@@ -21,6 +21,7 @@ public class StickerGenerator {
     graphics.drawImage(originalImage, 0, 0, null);
 
     // Escrever uma frase na nova imagem
+    graphics.drawString("TOPZERA", 0, (int) (newHeight - (newHeight * 0.083)));
 
     // Escrever a nova imagem em um novo arquivo
     ImageIO.write(newImage, "png", new File("assets/output/sticker.png"));
