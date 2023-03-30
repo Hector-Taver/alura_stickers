@@ -5,13 +5,18 @@ import java.util.List;
 public class App {
     public static void main(String[] args) throws Exception {
         // IMDB
-        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
-        ContentExtractor extractor = new IMDBContentExtractor();
+        // String url =
+        // "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
+        // ContentExtractor extractor = new IMDBContentExtractor();
 
         // Nasa
         // String url =
         // "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=2022-06-12&end_date=2022-06-14";
         // ContentExtractor extractor = new NasaContentExtractor();
+
+        // Nossa API
+        String url = "http://localhost:8080/languages";
+        ContentExtractor extractor = new LanguageAPIContentExtractor();
 
         Client http = new Client();
         String json = http.findData(url);
@@ -26,7 +31,7 @@ public class App {
 
             InputStream inputStream = new URL(content.getUrlImage()).openStream();
 
-            String fileName = "assets/output/" + content.getTitle() + ".png";
+            String fileName = "assets/" + content.getTitle() + ".png";
 
             generator.create(inputStream, fileName);
 
