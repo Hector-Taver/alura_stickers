@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +31,16 @@ public class StickerGenerator {
     graphics.setFont(font);
 
     // Escrever uma frase na nova imagem
-    graphics.drawString("TOPZERA", 200, (int) (newHeight - (newHeight * 0.083)));
+    String text = "TOPZERA";
+    FontMetrics fontMetrics = graphics.getFontMetrics();
+    Rectangle2D rectangle = fontMetrics.getStringBounds(text, graphics);
+
+    int textWidth = (int) rectangle.getWidth();
+    int textPositionX = (width - textWidth) / 2;
+
+    int textPositionY = (int) (newHeight - (newHeight * 0.07));
+
+    graphics.drawString(text, textPositionX, textPositionY);
 
     // Escrever a nova imagem em um novo arquivo
     ImageIO.write(newImage, "png", new File(fileName));
