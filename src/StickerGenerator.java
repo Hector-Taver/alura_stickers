@@ -1,7 +1,12 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,7 +31,7 @@ public class StickerGenerator {
     graphics.drawImage(originalImage, 0, 0, null);
 
     // Configurar a fonte
-    Font font = new Font(Font.SANS_SERIF, Font.BOLD, 64);
+    Font font = new Font("Impact", Font.BOLD, 64);
     graphics.setColor(Color.YELLOW);
     graphics.setFont(font);
 
@@ -37,10 +42,25 @@ public class StickerGenerator {
 
     int textWidth = (int) rectangle.getWidth();
     int textPositionX = (width - textWidth) / 2;
-
     int textPositionY = (int) (newHeight - (newHeight * 0.07));
 
     graphics.drawString(text, textPositionX, textPositionY);
+
+    // Fazer um outline no texto
+    FontRenderContext fontRenderContext = graphics.getFontRenderContext();
+    TextLayout textLayout = new TextLayout(text, font, fontRenderContext);
+
+    Shape outline = textLayout.getOutline(null);
+    AffineTransform transform = graphics.getTransform();
+    transform.translate(textPositionX, textPositionY);
+    graphics.setTransform(transform);
+
+    BasicStroke outlineStroke = new BasicStroke(width * 0.004f);
+    graphics.setStroke(outlineStroke);
+
+    graphics.setColor(Color.BLACK);
+    graphics.draw(outline);
+    graphics.setClip(outline);
 
     // Escrever a nova imagem em um novo arquivo
     ImageIO.write(newImage, "png", new File(fileName));
