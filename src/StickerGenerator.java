@@ -36,6 +36,7 @@ public class StickerGenerator {
     graphics.setFont(font);
 
     // Escrever uma frase na nova imagem
+
     String text = "TOPZERA";
     FontMetrics fontMetrics = graphics.getFontMetrics();
     Rectangle2D rectangle = fontMetrics.getStringBounds(text, graphics);

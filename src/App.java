@@ -29,16 +29,16 @@ public class App {
         File directory = new File("stickers/");
         directory.mkdir();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < contents.size(); i++) {
             Content content = contents.get(i);
 
-            InputStream inputStream = new URL(content.getUrlImage()).openStream();
+            InputStream inputStream = new URL(content.urlImage()).openStream();
 
-            String fileName = "stickers/" + content.getTitle() + ".png";
+            String fileName = "stickers/" + content.title() + ".png";
 
             generator.create(inputStream, fileName);
 
-            System.out.println(content.getTitle());
+            System.out.println(content.title());
             System.out.println();
         }
     }
