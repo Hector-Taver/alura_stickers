@@ -29,7 +29,7 @@ public class App {
         File directory = new File("stickers/");
         directory.mkdir();
 
-        for (int i = 0; i < contents.size(); i++) {
+        for (int i = 0; i < 3; i++) {
             Content content = contents.get(i);
 
             InputStream inputStream = new URL(content.urlImage()).openStream();

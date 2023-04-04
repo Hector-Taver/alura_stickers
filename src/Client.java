@@ -15,7 +15,7 @@ public class Client {
       String body = response.body();
       return body;
     } catch (IOException | InterruptedException ex) {
-      throw new RuntimeException(ex);
+      throw new ClientException("Erro ao consultar a URL. :(");
     }
 
   }
