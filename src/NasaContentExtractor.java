@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,18 +7,9 @@ public class NasaContentExtractor implements ContentExtractor {
     JsonParser parser = new JsonParser();
     List<Map<String, String>> attributesList = parser.parse(json);
 
-    List<Content> contents = new ArrayList<>();
-
     // Popular a lista de conteúdos
-    for (Map<String, String> attributes : attributesList) {
-      String title = attributes.get("title");
-      String urlImage = attributes.get("url");
-
-      Content content = new Content(title, urlImage);
-
-      contents.add(content);
-    }
-
-    return contents;
+    return attributesList.stream()
+        .map(attributes -> new Content(attributes.get("title"), attributes.get("url")))
+        .toList();
   }
 }
