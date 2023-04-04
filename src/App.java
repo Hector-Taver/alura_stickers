@@ -5,18 +5,11 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        // IMDB
-        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
-        ContentExtractor extractor = new IMDBContentExtractor();
+        // Pegar a URL de uma das APIs (IMDB, Nasa, LanguageAPI)
+        API api = API.IMDB_TOP_MOVIES;
 
-        // Nasa
-        // String url =
-        // "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=2022-06-12&end_date=2022-06-14";
-        // ContentExtractor extractor = new NasaContentExtractor();
-
-        // Nossa API
-        // String url = "http://localhost:8080/languages";
-        // ContentExtractor extractor = new LanguageAPIContentExtractor();
+        String url = api.getUrl();
+        ContentExtractor extractor = api.getExtractor();
 
         Client http = new Client();
         String json = http.findData(url);
